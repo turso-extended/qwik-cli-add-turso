@@ -18,7 +18,7 @@ TURSO_DB_URL=
 TURSO_DB_AUTH_TOKEN=
 ```
 
-For production, add these variables to your deployment service.
+For production, add these variables to your deployment service configuration.
 
 ## How to use the integration
 
