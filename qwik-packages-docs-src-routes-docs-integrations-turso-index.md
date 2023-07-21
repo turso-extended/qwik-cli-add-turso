@@ -70,7 +70,7 @@ export const useRouteLoader = routeLoader$(
 
 ## Using file databases
 
-The libSQL driver we are using to connect to Turso also let's us work with local
+The [libSQL driver] we are using to connect to Turso also let's us work with local
 database files. This is ideal when working offline during development or when
 running tests in Continuous Integration.
 
@@ -91,3 +91,4 @@ export function tursoClient(requestEvent: RequestEventCommon): Client {
 [installed the Turso CLI]: https://docs.turso.tech/reference/turso-cli#installation
 [created a Turso database]: https://docs.turso.tech/reference/turso-cli#create-a-logical-database
 [Turso database credentials and assign the obtained values to the environment variables]: https://github.com/turso-extended/app-turqw-store/tree/master#set-up-turso-on-the-project
+[libSQL driver]: https://github.com/libsql/libsql-client-ts
