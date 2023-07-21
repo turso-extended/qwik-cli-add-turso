@@ -44,7 +44,7 @@ Start by creating a SQLite file database.
 sqlite3 foo.db "create table bar(name text);"
 ```
 
-> Note: If SQLite is not installed into you machine, you can download it from here.
+> Note: If SQLite is not installed in you machine, you can [download it from here].
 
 Then assign the database file path to the `TURSO_DB_URL` environment variable inside `.env.local`.
 
@@ -99,5 +99,6 @@ export const useRouteLoader = routeLoader$(
 
 [Turso]: https://turso.tech
 [libSQL]: https://libsql.org
+[download it from here]: https://sqlite.org/download.html
 [install the Turso CLI]: https://docs.turso.tech/reference/turso-cli#installation
 [create a Turso database]: https://docs.turso.tech/reference/turso-cli#create-a-logical-database
