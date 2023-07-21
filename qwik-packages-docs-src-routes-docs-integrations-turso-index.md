@@ -36,7 +36,8 @@ TURSO_DB_AUTH_TOKEN=
 
 ## Using file databases
 
-For local development and CI integration it is ideal to use local database files.
+For local development and CI integration it is ideal to use local database
+files.
 
 Start by creating a SQLite file database.
 
@@ -44,9 +45,12 @@ Start by creating a SQLite file database.
 sqlite3 foo.db "create table bar(name text);"
 ```
 
-> Note: If SQLite is not installed in you machine, you can [download it from here].
+> Note: If SQLite is not installed in you machine, you can [download it from
+>
+> > here].
 
-Then assign the database file path to the `TURSO_DB_URL` environment variable inside `.env.local`.
+Then assign the database file path to the `TURSO_DB_URL` environment variable
+inside `.env.local`.
 
 ```
 TURSO_DB_URL=file:foo.db
@@ -54,9 +58,12 @@ TURSO_DB_URL=file:foo.db
 
 ## Using a Turso database
 
-When you want to deploy your work to production, you can then [install the Turso CLI] to your machine and [create a Turso database].
+When you want to deploy your work to production, you can then [install the Turso
+CLI] to your machine and [create a Turso database].
 
-Using the Turso CLI, the following instructions will help you obtain your Turso database credentials and assign them to the environment variables inside your deployment environment.
+Using the Turso CLI, the following instructions will help you obtain your Turso
+database credentials and assign them to the environment variables inside your
+deployment environment.
 
 Starting with the database url, run the following command.
 
@@ -72,12 +79,13 @@ And, for the database authentication token, run the command.
 turso db tokens create <database-name>
 ```
 
-Copy the resulting token and assign it to the `TURSO_DB_AUTH_TOKEN` environment variable.
+Copy the resulting token and assign it to the `TURSO_DB_AUTH_TOKEN` environment
+variable.
 
 ## How to use Turso inside Qwik
 
-Import `tursoClient` inside your routes and initiate a database client instance within
-Qwik's server-side APIs that expose the `RequestEvent` object, such as
+Import `tursoClient` inside your routes and initiate a database client instance
+within Qwik's server-side APIs that expose the `RequestEvent` object, such as
 `routeLoader$()`, `routeAction$()`, `server$()` and endpoint handlers such as
 `onGet`, `onPost`, `onRequest`.
 
