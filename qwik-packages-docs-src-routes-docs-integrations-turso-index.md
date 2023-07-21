@@ -34,23 +34,52 @@ TURSO_DB_URL=
 TURSO_DB_AUTH_TOKEN=
 ```
 
-**_Note_**
+## Using file databases
 
-> Make sure that you have [installed the Turso CLI] to your machine and have
-> also [created a Turso database].
+For local development and CI integration it is ideal to use local database files.
 
-Get your [Turso database credentials and assign the obtained values to the
-environment variables] above.
+Start by creating a SQLite file database.
 
-**_Note_**: In production, add these variables where appropriate within your
-deployment service's configuration.
+```sh
+sqlite3 foo.db "create table bar(name text);"
+```
 
-## How to use Turso in your pages
+> Note: If SQLite is not installed into you machine, you can download it from here.
 
-You can then import `tursoClient` and initiate a database client instance within
+Then assign the database file path to the `TURSO_DB_URL` environment variable inside `.env.local`.
+
+```
+TURSO_DB_URL=file:foo.db
+```
+
+## Using a Turso database
+
+When you want to deploy your work to production, you can then [install the Turso CLI] to your machine and [create a Turso database].
+
+Using the Turso CLI, the following instructions will help you obtain your Turso database credentials and assign them to the environment variables inside your deployment environment.
+
+Starting with the database url, run the following command.
+
+```sh
+turso db show <database-name> --url
+```
+
+Copy the resulting url and assign it to the `TURSO_DB_URL` environment variable.
+
+And, for the database authentication token, run the command.
+
+```sh
+turso db tokens create <database-name>
+```
+
+Copy the resulting token and assign it to the `TURSO_DB_AUTH_TOKEN` environment variable.
+
+## How to use Turso inside Qwik
+
+Import `tursoClient` inside your routes and initiate a database client instance within
 Qwik's server-side APIs that expose the `RequestEvent` object, such as
 `routeLoader$()`, `routeAction$()`, `server$()` and endpoint handlers such as
-`onGet`, `onPost`, `onRequest` within your pages.
+`onGet`, `onPost`, `onRequest`.
 
 ```ts
 import { tursoClient } from "~/lib/turso";
@@ -68,27 +97,7 @@ export const useRouteLoader = routeLoader$(
 );
 ```
 
-## Using file databases
-
-The [libSQL driver] we are using to connect to Turso also let's us work with local
-database files. This is ideal when working offline during development or when
-running tests in Continuous Integration.
-
-To use a SQLite file database, just update the `tursoClient()` function inside
-`/src/lib/turso.ts` passing the path to your database file in place of the
-database url inside the libSQL configuration.
-
-```ts
-export function tursoClient(requestEvent: RequestEventCommon): Client {
-  return createClient({
-    url: "file:database.db", // database file located at the project's root - /database.db
-  });
-}
-```
-
 [Turso]: https://turso.tech
 [libSQL]: https://libsql.org
-[installed the Turso CLI]: https://docs.turso.tech/reference/turso-cli#installation
-[created a Turso database]: https://docs.turso.tech/reference/turso-cli#create-a-logical-database
-[Turso database credentials and assign the obtained values to the environment variables]: https://github.com/turso-extended/app-turqw-store/tree/master#set-up-turso-on-the-project
-[libSQL driver]: https://github.com/libsql/libsql-client-ts
+[install the Turso CLI]: https://docs.turso.tech/reference/turso-cli#installation
+[create a Turso database]: https://docs.turso.tech/reference/turso-cli#create-a-logical-database
