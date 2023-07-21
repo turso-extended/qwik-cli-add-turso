@@ -38,7 +38,10 @@ TURSO_DB_AUTH_TOKEN=
 
 For local development and CI integration it is ideal to use local database files.
 
-First check if SQLite is installed in your machine by running `sqlite3 --version`. If you get anything other than a version number (e.g `0-14 20:58:05 554764a6e721fab307c63a4f98cd958c8428a5d9d8edfde951858d6fd02daapl`), visit [this link for installation instructions].
+First check if SQLite is installed in your machine by running `sqlite3
+--version`. If you get anything other than a version number (e.g `0-14 20:58:05
+554764a6e721fab307c63a4f98cd958c8428a5d9d8edfde951858d6fd02daapl`), visit [this
+link for installation instructions].
 
 Proceed to creating a SQLite file database by running the following command.
 
@@ -61,7 +64,8 @@ sqlite> insert into todo(id, task) values(2, "Buy groceries");
 
 Quit the shell `.quit`
 
-Then, assign the database file path to the `TURSO_DB_URL` environment variable inside `.env.local`.
+Then, assign the database file path to the `TURSO_DB_URL` environment variable
+inside `.env.local`.
 
 ```
 TURSO_DB_URL=file:foo.db
@@ -71,8 +75,8 @@ TURSO_DB_URL=file:foo.db
 
 ## Using a Turso database
 
-When you want to deploy your project to production, you can then [install the Turso
-CLI] to your machine and [create a Turso database].
+When you want to deploy your project to production, you can then [install the
+Turso CLI] to your machine and [create a Turso database].
 
 Use the Turso CLI's `db shell` command to issue queries to your database.
 
