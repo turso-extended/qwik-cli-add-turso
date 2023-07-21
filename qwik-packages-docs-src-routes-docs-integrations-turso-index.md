@@ -40,11 +40,26 @@ For local development and CI integration it is ideal to use local database files
 
 First check if SQLite is installed in your machine by running `sqlite3 --version`. If you get anything other than a version number (e.g `0-14 20:58:05 554764a6e721fab307c63a4f98cd958c8428a5d9d8edfde951858d6fd02daapl`), visit [this link for installation instructions].
 
-Proceed to creating a SQLite file database by running the following command, run some SQLite commands (e.g `.tables`), and quit the shell `.quit`.
+Proceed to creating a SQLite file database by running the following command.
 
 ```sh
 sqlite3 foo.db
 ```
+
+Create your database schema.
+
+```sh
+sqlite> create table todo (id integer not null, task text, done int default 0);
+```
+
+Seed some data into your table.
+
+```sh
+sqlite> insert into todo(id, task) values(1, "Go to the gym");
+sqlite> insert into todo(id, task) values(2, "Buy groceries");
+```
+
+Quit the shell `.quit`
 
 Then, assign the database file path to the `TURSO_DB_URL` environment variable inside `.env.local`.
 
@@ -52,18 +67,36 @@ Then, assign the database file path to the `TURSO_DB_URL` environment variable i
 TURSO_DB_URL=file:foo.db
 ```
 
-Use the SQLite shell to create the schema for your file database.
-
 > **_Note_**: A database token is not needed when working with file databases.
 
 ## Using a Turso database
 
-When you want to deploy your work to production, you can then [install the Turso
+When you want to deploy your project to production, you can then [install the Turso
 CLI] to your machine and [create a Turso database].
 
-Using the Turso CLI, the following instructions will help you obtain your Turso
-database credentials and assign them to the environment variables inside your
-deployment environment.
+Use the Turso CLI's `db shell` command to issue queries to your database.
+
+```sh
+turso db shell <database-name>
+```
+
+Create your database schema.
+
+```sh
+→  create table todo (id integer not null, task text, done int default 0);
+```
+
+Seed some data into your table.
+
+```sh
+→  insert into todo(id, task) values(1, "Go to the gym");
+→  insert into todo(id, task) values(2, "Buy groceries");
+```
+
+Quit the shell `.quit`
+
+Use the following instructions to obtain your Turso database credentials and
+assign them to the environment variables inside your deployment environment.
 
 Starting with the database url, run the following command.
 
@@ -81,12 +114,6 @@ turso db tokens create <database-name>
 
 Copy the resulting token and assign it to the `TURSO_DB_AUTH_TOKEN` environment
 variable.
-
-With the Turso CLI installed, use the `db shell` command to interactively work on your Turso database's schema.
-
-```sh
-turso db shell <database-name>
-```
 
 ## How to use Turso inside Qwik
 
